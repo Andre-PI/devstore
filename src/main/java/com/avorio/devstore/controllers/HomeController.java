@@ -10,6 +10,8 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 
@@ -29,6 +31,12 @@ public class HomeController {
         saveUserService.persistUser(user);
         return "saved";
     }
+
+    @GetMapping("/getall")
+    public String getMethodName(@RequestParam String param) {
+        return "Test";
+    }
+    
 
     
 }
