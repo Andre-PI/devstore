@@ -10,13 +10,13 @@ import com.avorio.devstore.model.UserRepository;
 @Service
 public class SaveUserService {
     @Autowired
-    CredentialsChecker credentialsChecker;
+    private CredentialsChecker credentialsChecker;
     @Autowired
     private UserRepository repo;
     private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(12);
 
-    public boolean persistUser(User user){
-        String[] userData = {user.getEmail(),user.getUserName(),user.getPassword()};
+    protected boolean persistUser(User user){
+        String[] userData = {user.getEmail(),user.getUserName(),user.getPassword(),user.getRole()};
         boolean checker;
 
         for (String string : userData) {
@@ -25,6 +25,7 @@ public class SaveUserService {
                 return false;
             }
         }
+        
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         repo.save(user);
         return true;
